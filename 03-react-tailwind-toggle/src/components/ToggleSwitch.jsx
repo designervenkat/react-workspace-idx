@@ -2,15 +2,20 @@ import {useEffect, useState} from "react"
 import { Moon, SunMoon } from 'lucide-react';
 export default function ToggleSwitch(){
     
-    const [isDarkMode, setIsDarkMode] = useState(false)
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const savedTheme = localStorage.getItem("theme")
+        return savedTheme === "dark"
+    })
 
 
     useEffect(() => {
         const htmlEl = document.documentElement
         if(isDarkMode) {
             htmlEl.classList.add("dark")
+            localStorage.setItem("theme", "dark")
         } else {
             htmlEl.classList.remove("dark")
+            localStorage.setItem("theme", "light")
         }
     }, [isDarkMode])
 
