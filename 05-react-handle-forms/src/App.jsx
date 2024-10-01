@@ -1,11 +1,11 @@
-import ReactHookFormFive from "./components/rhf-part-five";
+import ZodReactForm from "./components/rhf-z-part-six";
 
 function App() {
   
   
   
   return (    
-    <ReactHookFormFive />
+    <ZodReactForm />
   );
 }
 
