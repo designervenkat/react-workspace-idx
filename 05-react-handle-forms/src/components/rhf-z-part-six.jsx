@@ -29,7 +29,6 @@ export default function ZodReactForm() {
       `https://jsonplaceholder.typicode.com/users?email=${email}`
     );
     const data = await response.json();
-
     if (data.length > 0) {
       setError("root", {
         message: "Email already exist! Please try to login!",
