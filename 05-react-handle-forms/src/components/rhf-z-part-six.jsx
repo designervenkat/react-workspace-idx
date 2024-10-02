@@ -10,6 +10,7 @@ export default function ZodReactForm() {
     register,
     handleSubmit,
     control,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(userSignup),
@@ -24,8 +25,19 @@ export default function ZodReactForm() {
     gender,
     terms,
   }) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log({ username, email, password });
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/users?email=${email}`
+    );
+    const data = await response.json();
+
+    if (data.length > 0) {
+      setError("root", {
+        message: "Email already exist! Please try to login!",
+      });
+    } else {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log({ username, email, password });
+    }
   };
   return (
     <div className="h-screen w-full max-w-7xl mx-auto grid place-content-center">
@@ -85,7 +97,6 @@ export default function ZodReactForm() {
             </span>
           )}
 
-
           {/* Fixed the code */}
           <fieldset>
             <legend>Select gender:</legend>
@@ -125,6 +136,10 @@ export default function ZodReactForm() {
           >
             {isSubmitting ? <Loader /> : "Submit"}
           </button>
+
+          {errors.root && (
+            <span className="text-red-400 block">{errors.root?.message}</span>
+          )}
         </form>
       </div>
       <DevTool control={control} />
