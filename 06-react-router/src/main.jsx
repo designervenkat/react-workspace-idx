@@ -1,47 +1,106 @@
-import "./index.css";
+import './index.css'
 
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+   createBrowserRouter,
+   createRoutesFromElements,
+   Route,
+   RouterProvider,
+} from 'react-router-dom'
 
-import Layout from "./Layout.jsx";
-import HomePage from "./components/pages/Home.page.jsx";
-import AboutPage from "./components/pages/About.page.jsx";
-import ContactPage from "./components/pages/Contact.page.jsx";
-import ProjectPage from "./components/pages/Project.page.jsx";
+import Layout from './layouts/Layout.jsx'
+import HomePage from './components/pages/website/Home.page.jsx'
+import AboutPage from './components/pages/website/About.page.jsx'
+import ContactPage from './components/pages/website/Contact.page.jsx'
+import ProjectPage from './components/pages/website/Project.page.jsx'
 
-const navigation = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "",
-        element: <HomePage />,
-      },
-      {
-        path: "about",
-        element: <AboutPage />,
-      },
-      {
-        path: "project",
-        element: <ProjectPage />,
-      },
-      {
-        path: "contact",
-        element: <ContactPage />,
-      },
-      {
-        path: "dummy",
-        element: "This is Dummy Component",
-      },
-    ],
-  },
-]);
+import AuthLayout from './layouts/AuthLayout.jsx'
+import Login from './components/pages/auth/Login.jsx'
+import Signup from './components/pages/auth/Signup.jsx'
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RouterProvider router={navigation} />
-  </StrictMode>
-);
+import DashboardLayout from './layouts/DashboardLayout.jsx'
+import Blog from './components/pages/dashboard/Blog.jsx'
+
+// const navigation = createBrowserRouter([
+//    {
+//       path: '/',
+//       element: <Layout />,
+//       children: [
+//          {
+//             path: '',
+//             element: <HomePage />,
+//          },
+//          {
+//             path: 'about',
+//             element: <AboutPage />,
+//          },
+//          {
+//             path: 'project',
+//             element: <ProjectPage />,
+//          },
+//          {
+//             path: 'contact',
+//             element: <ContactPage />,
+//          },
+//       ],
+//    },
+// ])
+
+const navigation = createBrowserRouter(
+   createRoutesFromElements(
+      <Route>
+         {/* Public Auth Navigation */}
+         <Route element={<AuthLayout />}>
+            {/* childerns */}
+            <Route
+               path='/auth/login'
+               element={<Login />}
+            />
+            <Route
+               path='/auth/register'
+               element={<Signup />}
+            />
+         </Route>
+
+         {/* Private Pages */}
+         <Route element={<DashboardLayout />}>
+            {/* childerns */}
+            <Route
+               path='/dashboard/blog'
+               element={<Blog />}
+            />
+         </Route>
+
+         {/* Public Website Navigation */}
+         <Route
+            path='/'
+            element={<Layout />}>
+            {/* childerns */}
+            <Route
+               path=''
+               element={<HomePage />}
+            />
+            <Route
+               path='about'
+               element={<AboutPage />}
+            />
+            <Route
+               path='project'
+               element={<ProjectPage />}
+            />
+            <Route
+               path='contact'
+               element={<ContactPage />}
+            />
+         </Route>
+      </Route>
+   )
+)
+
+createRoot(document.getElementById('root')).render(
+   <StrictMode>
+      <RouterProvider router={navigation} />
+   </StrictMode>
+)
