@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom'
 
 export default function DashboardLayout() {
-   const isAuthenicated = false
+   const isAuthenicated = true
 
    return (
       <>

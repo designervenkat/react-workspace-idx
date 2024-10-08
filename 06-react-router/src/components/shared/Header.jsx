@@ -1,7 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, NavLink } from 'react-router-dom'
+import { headerMenu } from '../../helper/HeaderNav'
 
 export default function Header() {
    const navigate = useNavigate()
+
    return (
       <header className='p-4 dark:bg-gray-100 dark:text-gray-800'>
          <div className='container flex justify-between h-16 mx-auto'>
@@ -20,46 +22,26 @@ export default function Header() {
                </svg>
             </a>
             <ul className='items-stretch hidden space-x-3 lg:flex'>
-               <li className='flex'>
-                  <Link
-                     rel='noopener noreferrer'
-                     to='/'
-                     className='flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600'>
-                     Home
-                  </Link>
-               </li>
-               <li className='flex'>
-                  <Link
-                     rel='noopener noreferrer'
-                     to='/about'
-                     className='flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600'>
-                     About
-                  </Link>
-               </li>
-               <li className='flex'>
-                  <Link
-                     rel='noopener noreferrer'
-                     to='/project'
-                     className='flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600'>
-                     Project
-                  </Link>
-               </li>
-               <li className='flex'>
-                  <Link
-                     rel='noopener noreferrer'
-                     to='/contact'
-                     className='flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600'>
-                     Contact
-                  </Link>
-               </li>
-               <li className='flex'>
-                  <Link
-                     rel='noopener noreferrer'
-                     to='/dashboard/blog'
-                     className='flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600'>
-                     Blog
-                  </Link>
-               </li>
+               {headerMenu.map((menu) => (
+                  <li
+                     className='flex'
+                     key={menu.name}>
+                     <NavLink
+                        rel='noopener noreferrer'
+                        to={menu.path}
+                        className='flex items-center px-4 -mb-1 border-b-2 dark:border-  hover:dark:text-orange-500 dark:text-violet-600 dark:border-violet-600'
+                        // className={({ isActive }) =>
+                        //    `flex items-center px-4 -mb-1 border-b-2 dark:border-  hover:dark:text-orange-500 ${
+                        //       isActive
+                        //          ? 'dark:text-green-600 dark:border-green-600'
+                        //          : 'dark:text-violet-600 dark:border-violet-600'
+                        //    }`
+                        // }
+                     >
+                        {menu.name}
+                     </NavLink>
+                  </li>
+               ))}
             </ul>
             <div className='items-center flex-shrink-0 hidden lg:flex'>
                <button

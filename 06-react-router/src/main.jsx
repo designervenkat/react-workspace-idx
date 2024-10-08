@@ -10,6 +10,8 @@ import {
    RouterProvider,
 } from 'react-router-dom'
 
+import NotFound from './components/shared/NotFound.jsx'
+
 import Layout from './layouts/Layout.jsx'
 import HomePage from './components/pages/website/Home.page.jsx'
 import AboutPage from './components/pages/website/About.page.jsx'
@@ -22,6 +24,7 @@ import Signup from './components/pages/auth/Signup.jsx'
 
 import DashboardLayout from './layouts/DashboardLayout.jsx'
 import Blog from './components/pages/dashboard/Blog.jsx'
+import User from './components/pages/dashboard/User.jsx'
 
 // const navigation = createBrowserRouter([
 //    {
@@ -71,6 +74,10 @@ const navigation = createBrowserRouter(
                path='/dashboard/blog'
                element={<Blog />}
             />
+            <Route
+               path='/dashboard/product/:id'
+               element={<User />}
+            />
          </Route>
 
          {/* Public Website Navigation */}
@@ -93,6 +100,11 @@ const navigation = createBrowserRouter(
             <Route
                path='contact'
                element={<ContactPage />}
+            />
+
+            <Route
+               path='*'
+               element={<NotFound />}
             />
          </Route>
       </Route>

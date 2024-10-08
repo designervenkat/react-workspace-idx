@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+li.flex a.active{
+    @apply dark:text-yellow-500 dark:border-yellow-500
+
+}
