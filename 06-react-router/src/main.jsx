@@ -25,6 +25,8 @@ import Signup from './components/pages/auth/Signup.jsx'
 import DashboardLayout from './layouts/DashboardLayout.jsx'
 import Blog from './components/pages/dashboard/Blog.jsx'
 import User from './components/pages/dashboard/User.jsx'
+import Products from './components/pages/dashboard/Products.jsx'
+import ProductDetail from './components/pages/dashboard/ProductDetail.jsx'
 
 // const navigation = createBrowserRouter([
 //    {
@@ -71,12 +73,12 @@ const navigation = createBrowserRouter(
          <Route element={<DashboardLayout />}>
             {/* childerns */}
             <Route
-               path='/dashboard/blog'
-               element={<Blog />}
+               path='/dashboard/products'
+               element={<Products />}
             />
             <Route
-               path='/dashboard/product/:id'
-               element={<User />}
+               path='/dashboard/products/:productId'
+               element={<ProductDetail />}
             />
          </Route>
 

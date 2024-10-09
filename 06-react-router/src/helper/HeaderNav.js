@@ -16,7 +16,7 @@ export const headerMenu = [
       path: '/contact',
    },
    {
-      name: 'Blog',
-      path: '/dashboard/blog',
+      name: 'Products',
+      path: '/dashboard/products',
    },
 ]
