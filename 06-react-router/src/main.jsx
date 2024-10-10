@@ -23,10 +23,11 @@ import Login from './components/pages/auth/Login.jsx'
 import Signup from './components/pages/auth/Signup.jsx'
 
 import DashboardLayout from './layouts/DashboardLayout.jsx'
-import Blog from './components/pages/dashboard/Blog.jsx'
-import User from './components/pages/dashboard/User.jsx'
+// import Blog from './components/pages/dashboard/Blog.jsx'
+// import User from './components/pages/dashboard/User.jsx'
 import Products from './components/pages/dashboard/Products.jsx'
 import ProductDetail from './components/pages/dashboard/ProductDetail.jsx'
+import Users from './components/pages/dashboard/Users.jsx'
 
 // const navigation = createBrowserRouter([
 //    {
@@ -79,6 +80,10 @@ const navigation = createBrowserRouter(
             <Route
                path='/dashboard/products/:productId'
                element={<ProductDetail />}
+            />
+             <Route
+               path='/dashboard/users/'
+               element={<Users />}
             />
          </Route>
 
