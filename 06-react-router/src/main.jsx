@@ -1,6 +1,6 @@
 import './index.css'
 
-import { StrictMode } from 'react'
+import { StrictMode, lazy } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import {
@@ -25,9 +25,21 @@ import Signup from './components/pages/auth/Signup.jsx'
 import DashboardLayout from './layouts/DashboardLayout.jsx'
 // import Blog from './components/pages/dashboard/Blog.jsx'
 // import User from './components/pages/dashboard/User.jsx'
-import Products from './components/pages/dashboard/Products.jsx'
+
+// Lazy routing start
+// old import
+// import Products from './components/pages/dashboard/Products.jsx'
+
+// React Lazy Routing or Code Splitting
+// lazy import
+
+const Products = lazy(() => import('./components/pages/dashboard/Products.jsx'))
+
+// Lazy routing end
+
 import ProductDetail from './components/pages/dashboard/ProductDetail.jsx'
 import Users from './components/pages/dashboard/Users.jsx'
+import Loader from './components/shared/Loader.jsx'
 
 // const navigation = createBrowserRouter([
 //    {
@@ -73,15 +85,27 @@ const navigation = createBrowserRouter(
          {/* Private Pages */}
          <Route element={<DashboardLayout />}>
             {/* childerns */}
-            <Route
+            {/* <Route
                path='/dashboard/products'
                element={<Products />}
+            /> */}
+
+            {/* with lazy routing */}
+            <Route
+               path='/dashboard/products'
+               element={
+                  <React.Suspense fallback={<Loader />}>
+                     <Products />
+                  </React.Suspense>
+               }
             />
+            {/* with lazy routing */}
+
             <Route
                path='/dashboard/products/:productId'
                element={<ProductDetail />}
             />
-             <Route
+            <Route
                path='/dashboard/users/'
                element={<Users />}
             />
