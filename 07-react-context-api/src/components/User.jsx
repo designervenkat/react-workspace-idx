@@ -1,13 +1,11 @@
-import React from 'react'
-import MyContext from '../contexts/basic-context/MyContext'
+import React, { useContext } from 'react'
+import { AuthContext } from '../contexts/auth-context/AuthContext'
 
 export default function User() {
-   return (
-      <div>
-         User Component
-         <MyContext.Consumer>
-            {(data) => <div>{data.username}</div>}
-         </MyContext.Consumer>
-      </div>
-   )
+    const { user } = useContext(AuthContext)
+    return (
+        <div>
+            User Component {user && user.username} || {user && user.email}
+        </div>
+    )
 }

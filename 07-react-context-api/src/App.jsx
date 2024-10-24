@@ -1,32 +1,39 @@
-import React from 'react'
-import MyContext from './contexts/basic-context/MyContext'
+import { useEffect, useState } from 'react'
+import Card from './components/Card'
+import Header from './components/Header'
+import { ThemeProvider } from './contexts/theme-context/ThemeContext'
+import Login from './components/Login'
+import AuthProviderContext from './contexts/auth-context/AuthProviderContext'
+import Profile from './components/Profile'
 import User from './components/User'
-import ContextProvider from './contexts/basic-context/MyContextProvider.jsx'
-import Nav from './components/Nav.jsx'
-import Profile from './components/Profile.jsx'
-import Data from './components/Data.jsx'
 
 function App() {
-   return (
-      <>
-         <h2>Context API</h2>
-         {/* <MyContext.Consumer>
-            {(data) => (
-               <div>
-                  <h1>{data.username}</h1>
-                  <p>{data.message}</p>
-               </div>
-            )}
-         </MyContext.Consumer> */}
+    const [themeMode, setThemeMode] = useState('light')
 
-         <ContextProvider>
-            {/* <Nav />
-            <User />
-            <Profile /> */}
-            <Data />
-         </ContextProvider>
-      </>
-   )
+    const darkTheme = () => {
+        setThemeMode('dark')
+    }
+    const lightTheme = () => {
+        setThemeMode('light')
+    }
+
+    // Theme change function
+    useEffect(() => {
+        document.querySelector('html').classList.remove('light', 'dark')
+        document.querySelector('html').classList.add(themeMode)
+    }, [themeMode])
+
+    return (
+        <AuthProviderContext>
+            <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
+                <Header />
+                <Profile />
+                <Login />
+
+                <User />
+            </ThemeProvider>
+        </AuthProviderContext>
+    )
 }
 
 export default App
