@@ -1,9 +1,8 @@
-// import useStore from './../zustand/store'
+import useStore from './../zustand/store'
 import Todo from './Todo'
 
 const TodoList = () => {
-    // const todos = useStore((state) => state.todos)
-    const todos = []
+    const todos = useStore((state) => state.todos)
 
     return (
         <div>

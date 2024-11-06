@@ -1,14 +1,17 @@
 /* eslint-disable react/prop-types */
 // src/Todo.js
 import { useState } from 'react'
-
+import useStore from './../zustand/store'
 import { Trash2, Save, Edit2 } from 'lucide-react'
 
 const Todo = ({ todo }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [newText, setNewText] = useState(todo.text)
+    const updateTodo = useStore((state) => state.updateTodo)
+    const removeTodo = useStore((state) => state.removeTodo)
 
     const handleUpdate = () => {
+        updateTodo(todo.id, { ...todo, text: newText })
         setIsEditing(false)
     }
 
@@ -21,10 +24,18 @@ const Todo = ({ todo }) => {
                     onChange={(e) => setNewText(e.target.value)}
                 />
             ) : (
-                <div className="flex-1 bg-slate-300 px-3 py-2">{todo.text}</div>
+                <div className="flex-1 text-slate-800 bg-slate-300 px-3 py-2">
+                    {todo.text}
+                </div>
             )}
             <button
-                onClick={() => {}}
+                onClick={() => {
+                    if (isEditing) {
+                        handleUpdate()
+                    } else {
+                        setIsEditing(true)
+                    }
+                }}
                 className={`${
                     isEditing ? 'bg-green-500' : 'bg-orange-500'
                 } text-white border-0 py-2 px-5 focus:outline-none hover:bg-orange-600 rounded text-md`}
@@ -37,7 +48,7 @@ const Todo = ({ todo }) => {
             </button>
 
             <button
-                onClick={() => {}}
+                onClick={() => removeTodo(todo.id)}
                 className="text-white bg-red-500 border-0 py-2 px-5 focus:outline-none hover:bg-red-600 rounded text-md"
             >
                 <Trash2 className="w-4" />

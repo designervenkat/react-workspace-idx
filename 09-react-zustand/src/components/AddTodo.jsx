@@ -1,17 +1,17 @@
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
-// import useStore from './../zustand/store'
+import useStore from './../zustand/store'
 
 const AddTodo = () => {
     const [text, setText] = useState('')
-    // const addTodo = useStore((state) => state.addTodo)
+    const addTodo = useStore((state) => state.addTodo)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // addTodo({
-        //     id: uuidv4(),
-        //     text,
-        // })
+        addTodo({
+            id: uuidv4(),
+            text,
+        })
         setText('')
     }
 
